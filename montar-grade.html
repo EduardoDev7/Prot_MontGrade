@@ -113,7 +113,7 @@
         }
         #horario-semanal {
             display: grid;
-            grid-template-columns: 100px repeat(5, 1fr);
+            grid-template-columns: 100px repeat(6, 1fr); /* Aumentado para 6 colunas para incluir Sábado */
             gap: 5px;
         }
         .horario-header, .horario-header-hora {
@@ -188,7 +188,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // HORÁRIOS 100% CORRIGIDOS COM BASE NA SUA ÚLTIMA TRANSCRIÇÃO
             const turmas = [
                 // 1º Período (Noturno)
                 { id: 'FIL110_DEFIL', codigo: 'FIL110', nome: 'Filosofia Geral', professor: 'Défil', aulas: [{ dia: 1, horario: '19:00' }, { dia: 2, horario: '19:00' }] },
@@ -257,6 +256,14 @@
                 { id: 'DIR154_FLAVIA_10', codigo: 'DIR154', nome: 'Direito Previdenciário', professor: 'Flávia Máximo', aulas: [{ dia: 1, horario: '08:20' }, { dia: 2, horario: '10:20' }] },
                 { id: 'DIR172_JOSE_10', codigo: 'DIR172', nome: 'Internacional Privado', professor: 'José Luiz Albuquerque', aulas: [{ dia: 2, horario: '08:20' }] },
                 { id: 'DEONTOLOGIA_HELENA_10', codigo: 'DEON', nome: 'Deontologia', professor: 'Helena Freitas', aulas: [{ dia: 1, horario: '10:20' }] },
+
+                // --- NOVAS MATÉRIAS ADICIONADAS ---
+                { id: 'DIR135_SAB08', codigo: 'DIR135', nome: 'História no Direito', professor: 'A Definir', aulas: [{ dia: 6, horario: '08:20' }] },
+                { id: 'DIR106_SEX19', codigo: 'DIR106', nome: 'Mediação e Formas Consensuais', professor: 'A Definir', aulas: [{ dia: 5, horario: '19:00' }] },
+                { id: 'DIR136_SEX19', codigo: 'DIR136', nome: 'Prática Simulada I', professor: 'A Definir', aulas: [{ dia: 5, horario: '19:00' }] },
+                { id: 'DIR166_SEGSEX08', codigo: 'DIR166', nome: 'Processual Penal II', professor: 'A Definir', aulas: [{ dia: 1, horario: '08:20' }, { dia: 5, horario: '08:20' }] },
+                { id: 'DIR109_SEX10', codigo: 'DIR109', nome: 'Elaboração de TCC', professor: 'A Definir', aulas: [{ dia: 5, horario: '10:20' }] },
+                { id: 'DIR140_TER08', codigo: 'DIR140', nome: 'Estágio Interno I', professor: 'A Definir', aulas: [{ dia: 2, horario: '08:20' }] }
             ];
             
             const listaDisciplinasContainer = document.getElementById('lista-disciplinas');
@@ -286,7 +293,7 @@
                 });
 
                 gradeContainer.innerHTML = '';
-                const dias = ['', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'];
+                const dias = ['', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
                 dias.forEach(dia => {
                     const header = document.createElement('div');
                     header.className = 'horario-header';
@@ -301,7 +308,7 @@
                     horaLabel.className = 'horario-header-hora';
                     horaLabel.textContent = horariosLabels[i];
                     gradeContainer.appendChild(horaLabel);
-                    for (let j = 1; j <= 5; j++) {
+                    for (let j = 1; j <= 6; j++) { // Alterado para 6 para incluir Sábado
                         const cell = document.createElement('div');
                         cell.className = 'horario-celula';
                         cell.dataset.dia = j;
@@ -354,8 +361,8 @@
                 
                 for (const aula of turma.aulas) {
                     const celula = gradeContainer.querySelector(`.horario-celula[data-dia='${aula.dia}'][data-horario='${aula.horario}']`);
-                    if (celula.hasChildNodes()) {
-                        alert('Conflito de horário! Esta célula já está ocupada.');
+                    if (!celula || celula.hasChildNodes()) {
+                        alert('Conflito de horário ou dia inválido! Esta célula já está ocupada ou não existe.');
                         return;
                     }
                 }
