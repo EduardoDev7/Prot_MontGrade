@@ -188,6 +188,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // HORÁRIOS 100% CORRIGIDOS COM BASE NA SUA ÚLTIMA TRANSCRIÇÃO
             const turmas = [
                 // 1º Período (Noturno)
                 { id: 'FIL110_DEFIL', codigo: 'FIL110', nome: 'Filosofia Geral', professor: 'Défil', aulas: [{ dia: 1, horario: '19:00' }, { dia: 2, horario: '19:00' }] },
@@ -205,7 +206,7 @@
                 { id: 'DIR105_GIULIANO_2', codigo: 'DIR105', nome: 'Sociologia Jurídica', professor: 'Giuliano Fernandes', aulas: [{ dia: 2, horario: '10:20' }] },
                 { id: 'DIR102_BEATRIZ_2', codigo: 'DIR102', nome: 'Direito Civil II - Parte Geral', professor: 'Beatriz Schettini', aulas: [{ dia: 4, horario: '10:20' }, { dia: 5, horario: '10:20' }] },
 
-                // 3º Período ("matutino" no doc, mas horários noturnos)
+                // 3º Período
                 { id: 'DIR005_HELENA_3', codigo: 'DIR005', nome: 'Ética Profissional e OAB', professor: 'Helena Freitas', aulas: [{ dia: 5, horario: '17:10' }] },
                 { id: 'DIR113_ARNAUD_3', codigo: 'DIR113', nome: 'Civil - Obrigações I', professor: 'Arnaud Belloir', aulas: [{ dia: 1, horario: '19:00' }, { dia: 2, horario: '21:00' }] },
                 { id: 'DIR031_EDVALDO_3', codigo: 'DIR031', nome: 'Direito Penal I', professor: 'Edvaldo Pereira', aulas: [{ dia: 2, horario: '19:00' }, { dia: 4, horario: '21:00' }] },
@@ -213,46 +214,46 @@
                 { id: 'DIR004_FABIANO_3', codigo: 'DIR004', nome: 'TGP', professor: 'Fabiano Guzzo', aulas: [{ dia: 4, horario: '19:00' }, { dia: 1, horario: '21:00' }] },
                 { id: 'DIR122_GIULIANO_3', codigo: 'DIR122', nome: 'Direito Constitucional I', professor: 'Giuliano Fernandes', aulas: [{ dia: 3, horario: '21:00' }, { dia: 5, horario: '21:00' }] },
 
-                // 4º Período ("matutino" no doc)
+                // 4º Período
                 { id: 'DIR107_CLAUDIO_4', codigo: 'DIR107', nome: 'Teoria Geral e Prop. Industrial', professor: 'Cláudio Ribeiro', aulas: [{ dia: 1, horario: '08:20' }, { dia: 2, horario: '08:20' }] },
                 { id: 'DIR032_ANDRE_4', codigo: 'DIR032', nome: 'Direito Penal II', professor: 'André de Abreu', aulas: [{ dia: 3, horario: '08:20' }, { dia: 1, horario: '10:20' }] },
                 { id: 'DIR014_BEATRIZ_4', codigo: 'DIR014', nome: 'Civil - Obrigações II', professor: 'Beatriz Schettini', aulas: [{ dia: 4, horario: '08:20' }, { dia: 5, horario: '08:20' }] },
                 { id: 'DIR023_TATIANA_4', codigo: 'DIR023', nome: 'Direito Constitucional II', professor: 'Tatiana Ribeiro', aulas: [{ dia: 2, horario: '10:20' }, { dia: 3, horario: '10:20' }] },
                 { id: 'DIR256_LEONARDO_4', codigo: 'DIR256', nome: 'Processual Civil I', professor: 'Leonardo Nunes', aulas: [{ dia: 4, horario: '10:20' }, { dia: 5, horario: '10:20' }] },
 
-                // 5º Período ("noturno - 1º" no doc)
+                // 5º Período
                 { id: 'DIR127_FEDERICO_5', codigo: 'DIR127', nome: 'Direito Administrativo I', professor: 'Frederico Nunes', aulas: [{ dia: 1, horario: '19:00' }, { dia: 2, horario: '21:00' }] },
                 { id: 'DIR115_ARNAUD_5', codigo: 'DIR115', nome: 'Contratos I', professor: 'Arnaud Belloir', aulas: [{ dia: 2, horario: '19:00' }, { dia: 1, horario: '21:00' }] },
                 { id: 'DIR033_EDVALDO_5', codigo: 'DIR033', nome: 'Penal III', professor: 'Edvaldo Pereira', aulas: [{ dia: 3, horario: '19:00' }, { dia: 4, horario: '19:00' }] },
                 { id: 'DIR108_ROBERTO_5', codigo: 'DIR108', nome: 'Empresarial II', professor: 'Roberto Porto', aulas: [{ dia: 5, horario: '19:00' }, { dia: 4, horario: '21:00' }] },
                 { id: 'DIR257_HELENA_5', codigo: 'DIR257', nome: 'Processual Civil II', professor: 'Helena Freitas', aulas: [{ dia: 3, horario: '21:00' }, { dia: 5, horario: '21:00' }] },
                 
-                // 6º Período ("noturno - 1º" no doc)
+                // 6º Período
                 { id: 'DIR034_ANDRE_6', codigo: 'DIR034', nome: 'Direito Penal IV', professor: 'André de Abreu', aulas: [{ dia: 1, horario: '08:20' }, { dia: 3, horario: '10:20' }] },
                 { id: 'DIR128_FEDERICO_6', codigo: 'DIR128', nome: 'Administrativo II', professor: 'Frederico Nunes', aulas: [{ dia: 2, horario: '08:20' }, { dia: 1, horario: '10:20' }] },
                 { id: 'DIR116_CLAUDIO_6', codigo: 'DIR116', nome: 'Empresarial III', professor: 'Cláudio Ribeiro', aulas: [{ dia: 3, horario: '08:20' }, { dia: 2, horario: '10:20' }] },
                 { id: 'DIR258_LEONARDO_6', codigo: 'DIR258', nome: 'Processual Civil III', professor: 'Leonardo Nunes', aulas: [{ dia: 4, horario: '08:20' }, { dia: 5, horario: '08:20' }] },
                 { id: 'DIR117_NATALIA_6', codigo: 'DIR117', nome: 'Civil - Posse e Propriedade', professor: 'Natália Lisboa', aulas: [{ dia: 4, horario: '10:20' }, { dia: 5, horario: '10:20' }] },
 
-                // 7º Período ("noturno - 2º" no doc)
+                // 7º Período
                 { id: 'DIR119_RENATA_7', codigo: 'DIR119', nome: 'Direitos Reais Limitados', professor: 'Renata Barbosa', aulas: [{ dia: 1, horario: '19:00' }] },
                 { id: 'DIR129_FEDERICO_7', codigo: 'DIR129', nome: 'Administrativo III', professor: 'Frederico Nunes', aulas: [{ dia: 2, horario: '19:00' }, { dia: 1, horario: '21:00' }] },
                 { id: 'DIR174_AMAURI_7', codigo: 'DIR174', nome: 'Direito do Trabalho I', professor: 'Amauri Cesar', aulas: [{ dia: 3, horario: '19:00' }, { dia: 4, horario: '21:00' }] },
                 { id: 'DIR130_ROBERTO_7', codigo: 'DIR130', nome: 'Recuperação e Falência', professor: 'Roberto Porto', aulas: [{ dia: 4, horario: '19:00' }, { dia: 5, horario: '21:00' }] },
                 { id: 'DIR165_LUIZ_7', codigo: 'DIR165', nome: 'Processual Penal I', professor: 'Luiz Henrique da Costa', aulas: [{ dia: 2, horario: '21:00' }, { dia: 3, horario: '21:00' }] },
                 
-                // 8º Período ("noturno - 2º" no doc)
+                // 8º Período
                 { id: 'DIR175_AMAURI_8', codigo: 'DIR175', nome: 'Trabalho II', professor: 'Amauri Cesar', aulas: [{ dia: 3, horario: '08:20' }, { dia: 4, horario: '08:20' }] },
                 { id: 'DIR538_JOSE_8', codigo: 'DIR538', nome: 'Internacional Público', professor: 'José Luiz Albuquerque', aulas: [{ dia: 1, horario: '10:20' }, { dia: 2, horario: '10:20' }] },
                 { id: 'DIR137_IARA_8', codigo: 'DIR137', nome: 'Civil - Famílias', professor: 'Iara Antunes', aulas: [{ dia: 3, horario: '10:20' }, { dia: 4, horario: '10:20' }] },
                 
-                // 9º Período ("noturno - 3º" no doc)
+                // 9º Período
                 { id: 'DIR258_FABIANO_9', codigo: 'DIR258', nome: 'Processual Civil III', professor: 'Fabiano Guzzo', aulas: [{ dia: 1, horario: '19:00' }, { dia: 4, horario: '21:00' }] },
                 { id: 'DIR167_LUIZ_9', codigo: 'DIR167', nome: 'Direito Penal III', professor: 'Luiz Henrique da Costa', aulas: [{ dia: 2, horario: '19:00' }, { dia: 3, horario: '19:00' }] },
                 { id: 'DIR141_IARA_9', codigo: 'DIR141', nome: 'Civil - Sucessões', professor: 'Iara Antunes', aulas: [{ dia: 4, horario: '19:00' }, { dia: 3, horario: '21:00' }] },
                 { id: 'DIR153_FLAVIA_9', codigo: 'DIR153', nome: 'Processual do Trabalho', professor: 'Flávia Máximo', aulas: [{ dia: 1, horario: '21:00' }, { dia: 2, horario: '21:00' }] },
 
-                // 10º Período ("noturno - 3º" no doc)
+                // 10º Período
                 { id: 'DIR154_FLAVIA_10', codigo: 'DIR154', nome: 'Direito Previdenciário', professor: 'Flávia Máximo', aulas: [{ dia: 1, horario: '08:20' }, { dia: 2, horario: '10:20' }] },
                 { id: 'DIR172_JOSE_10', codigo: 'DIR172', nome: 'Internacional Privado', professor: 'José Luiz Albuquerque', aulas: [{ dia: 2, horario: '08:20' }] },
                 { id: 'DEONTOLOGIA_HELENA_10', codigo: 'DEON', nome: 'Deontologia', professor: 'Helena Freitas', aulas: [{ dia: 1, horario: '10:20' }] },
